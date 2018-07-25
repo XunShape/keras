@@ -11,6 +11,16 @@ from .utils.generic_utils import deserialize_keras_object
 from .engine import Layer
 
 
+def ssg(x, lamda=1.0):
+    """
+    SSG:self sparse gated activate function
+    SSG = x*σ(x)-lamda*σ(x)(1−σ(x))
+    Shiunwen Chen
+    2018/7/26
+    """
+    return K.sigmoid(x)-lamda*K.sigmoid(x)*(1-K.sigmoid(x))
+
+
 def softmax(x, axis=-1):
     """Softmax activation function.
 
