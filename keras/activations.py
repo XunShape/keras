@@ -10,6 +10,55 @@ from . import backend as K
 from .utils.generic_utils import deserialize_keras_object
 from .engine import Layer
 
+def UF_sigmod(x):
+    """fugue scheme
+    1-UP-Fugue-sigmod
+    Shiunwen Chen
+    2018/7/26
+    """
+    return 1/(1+K.exp(-x))+1/(1+K.exp(-(1/(1+K.exp(-x)))))
+    
+def UF_tanh(x):
+    """fugue scheme
+    1-UP-Fugue-tanh
+    Shiunwen Chen
+    2018/7/26
+    """
+    return 2/(1+K.exp(-x))+2/(1+K.exp(-(2/(1+K.exp(-x)))))-2
+
+def UF_sotfplus(x):
+    """fugue scheme
+    1-UP-Fugue-sotfplus
+    Shiunwen Chen
+    2018/7/26
+    """
+    return  K.log(1+K.exp(x))-1/(1+K.exp(-x))
+    
+def DF_sigmod(x):
+    """fugue scheme
+    1-dP-Fugue-sigmod
+    Shiunwen Chen
+    2018/7/26
+    """
+    return 1/(1+K.exp(-x))-(1-1/(1+K.exp(-x)))/(1+K.exp(-x))
+
+
+def DF_tanh(x):
+    """fugue scheme
+    1-dP-Fugue-tanh
+    Shiunwen Chen
+    2018/7/26
+    """
+    return 2/(1+K.exp(-x))-4/(1+K.exp(-x))^2
+
+def DF_sotfplus(x):
+    """fugue scheme
+    1-dP-Fugue-sotfplus
+    Shiunwen Chen
+    2018/7/26
+    """
+    return K.log(1+K.exp(x))-1/(1+K.exp(-x))
+    
 
 def softmax(x, axis=-1):
     """Softmax activation function.
